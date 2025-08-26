@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<PublishTrimmed>true</PublishTrimmed>
-		<StaticWebAssetBasePath>/WebCalendar.Client/</StaticWebAssetBasePath>
+		<StaticWebAssetBasePath>/WebCalendar/</StaticWebAssetBasePath>
 	</PropertyGroup>
 
 	<ItemGroup>
