@@ -1,0 +1,91 @@
+﻿@page "/"
+
+@using WebCalendar.Client.Pages.Razor
+@using WebCalendar.Client.Code;
+
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@inject CalendarStorageService CalendarStorageService
+
+<div class="@ThemeClass max-w-4xl mx-auto">
+    <div class="fixed inset-0 z-[-1] transition-all duration-700 ease-in-out @BackgroundClass"></div>
+
+    <div class="p-4 grid grid-cols-2 gap-y-4 gap-x-8 ">
+        <button class="button-style rounded-2xl p-4 cursor-pointer text-center bg-white/50 dark:bg-black/30"
+        @onclick="ToggleTheme" >
+
+            <span class="text-center text-sm font-semibold text-black dark:text-white">@Theme</span>
+        </button>
+
+        <button @onclick="ShowStatsAsync" class="button-style rounded-2xl p-4 cursor-pointer text-center bg-white/50 dark:bg-black/30">
+
+            <span class="text-center text-sm font-semibold text-black dark:text-white">@(ShowStatistics ? "Календарь" : "Статистика")</span>
+        </button>
+
+    </div>
+
+    @if (ShowStatistics)
+    {
+        <StatisticsCharts MarkedDays="@MarkedDays" IsDarkMode="IsDarkMode" />
+    }
+    else
+    {
+        <Calendar IsDarkMode="IsDarkMode" />
+    }
+
+</div>
+
+@code {
+    public bool IsDarkMode { get; private set; } = false;
+
+    private string Theme => IsDarkMode ? "Светлая тема" : "Темная тема";
+    private string ThemeClass => IsDarkMode ? "dark" : "";
+
+    private bool ShowStatistics { get; set; } = false;
+
+    private List<DateTime> MarkedDays { get; set; } = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ThemeCheck();
+            StateHasChanged();
+        }
+    }
+
+    private string BackgroundClass => IsDarkMode
+        ? "bg-gradient-conic-dark"
+        : "bg-gradient-conic-light";
+
+    private async Task ShowStatsAsync()
+    {
+        if (!ShowStatistics)
+        {
+            MarkedDays = await GetMarkedDaysAsync();
+        }
+        ShowStatistics = !ShowStatistics;
+    }
+
+    private async Task<List<DateTime>> GetMarkedDaysAsync()
+    {
+        List<CalendarDay> days = await CalendarStorageService.LoadDays();
+        return days.Where(d => d.IsMarked && d.Date != DateTime.MinValue).Select(d => d.Date).ToList();
+    }
+
+    private async Task ThemeCheck()
+    {
+        var stored = await JS.InvokeAsync<string>("localStorage.getItem", "theme");
+        IsDarkMode = stored == "dark";
+        if (string.IsNullOrEmpty(stored))
+        {
+            await JS.InvokeVoidAsync("localStorage.setItem", "theme", "light");
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        IsDarkMode = !IsDarkMode;
+        await JS.InvokeVoidAsync("localStorage.setItem", "theme", IsDarkMode ? "dark" : "light");
+    }
+}

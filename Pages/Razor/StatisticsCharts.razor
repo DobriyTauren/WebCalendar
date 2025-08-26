@@ -1,0 +1,73 @@
+﻿@using System.Globalization
+@inject IJSRuntime JSRuntime
+
+<div class="p-4 max-w-4xl mx-auto">
+    <h1 class="text-xl text-center font-bold mb-4 dark:text-white">Статистика</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white/50 dark:bg-black/30 rounded-xl shadow-lg p-4">
+            <h3 class="font-semibold mb-2 dark:text-white">Отмеченные дни по месяцам</h3>
+            <div id="days-chart" class="h-64"></div>
+        </div>
+        <div class="bg-white/50 dark:bg-black/30 rounded-xl shadow-lg p-4">
+            <h3 class="font-semibold mb-2 dark:text-white">Среднее количество отметок по дням недели</h3>
+            <div id="weekdays-chart" class="h-64"></div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<DateTime> MarkedDays { get; set; } = new();
+    [Parameter] public bool IsDarkMode { get; set; }
+
+    private bool _shouldRenderCharts = false;
+
+    protected override void OnParametersSet()
+    {
+        // Если параметры изменились, отмечаем необходимость перерисовки графика
+        _shouldRenderCharts = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || _shouldRenderCharts)
+        {
+            await GenerateCharts();
+            _shouldRenderCharts = false;
+        }
+    }
+
+    private async Task GenerateCharts()
+    {
+        if (MarkedDays.Any())
+        {
+            var daysByMonth = MarkedDays
+                .GroupBy(d => new { d.Year, d.Month })
+                .Select(g => new
+                {
+                    Month = new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMM yyyy", CultureInfo.CurrentCulture),
+                    Count = g.Count()
+                }).ToList();
+
+            var weekDays = Enumerable.Range(0, 7)
+                .Select(i => CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames[(i + 1) % 7])
+                .ToArray();
+
+            var weekDayCounts = new int[7];
+            foreach (var date in MarkedDays)
+            {
+                int dayOfWeek = ((int)date.DayOfWeek + 6) % 7;
+                weekDayCounts[dayOfWeek]++;
+            }
+            int totalWeeks = MarkedDays.Select(d => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).Distinct().Count();
+            var weekDayAverages = weekDayCounts.Select(c => totalWeeks > 0 ? Math.Round((double)c / totalWeeks, 2) : 0).ToArray();
+
+            await JSRuntime.InvokeVoidAsync("drawHighchartsStats",
+                daysByMonth.Select(x => x.Month).ToArray(),
+                daysByMonth.Select(x => x.Count).ToArray(),
+                weekDays,
+                weekDayAverages,
+                IsDarkMode
+            );
+        }
+    }
+}

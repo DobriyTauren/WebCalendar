@@ -1,0 +1,10 @@
+﻿@layer components {
+    .button-style {
+        @apply hover:scale-110 active:scale-95 transition-all duration-200 ease-in-out hover:shadow-lg;
+    }
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
