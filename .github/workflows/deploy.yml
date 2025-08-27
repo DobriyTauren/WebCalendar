@@ -43,8 +43,8 @@ jobs:
 
     - name: Replace base href for GitHub Pages
       run: |
-        sed -i 's|<base href="/"/>|<base href="/WebCalendar/"/>|' build/wwwroot/index.html
-
+        sed -i 's|<base href="/"/>|<base href="/WebCalendar/"/>|' build/index.html
+    
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
