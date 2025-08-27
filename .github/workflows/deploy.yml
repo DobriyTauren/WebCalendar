@@ -20,6 +20,11 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o build
 
+    - name: Remove precompressed files
+      run: |
+        find build/wwwroot -name "*.gz" -delete
+        find build/wwwroot -name "*.br" -delete
+        
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
@@ -35,6 +40,10 @@ jobs:
       with:
         name: blazor-build
         path: build
+
+    - name: Replace base href for GitHub Pages
+      run: |
+        sed -i 's|<base href="/"/>|<base href="/WebCalendar/"/>|' build/wwwroot/index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
