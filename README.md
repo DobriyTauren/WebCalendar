@@ -17,17 +17,13 @@
 
 ---
 
-## 📸 Светлая тема
+## 📸 Скриншоты
 
-![Светлая тема - календарь](docs/screenshot-light.png)
-![Светлая тема - статистика](docs/screenshot-light-stats.png)
+### Светлая тема
+<img src="docs/screenshot-light.png" width="400"/> <img src="docs/screenshot-light-stats.png" width="400"/>
 
----
-
-## 📸 Тёмная тема
-
-![Тёмная тема - календарь](docs/screenshot-dark.png)
-![Тёмная тема - статистика](docs/screenshot-dark-stats.png)
+### Тёмная тема
+<img src="docs/screenshot-dark.png" width="400"/> <img src="docs/screenshot-dark-stats.png" width="400"/>
 
 ---
 
