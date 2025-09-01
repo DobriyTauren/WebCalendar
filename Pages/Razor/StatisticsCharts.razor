@@ -42,11 +42,15 @@
         {
             var daysByMonth = MarkedDays
                 .GroupBy(d => new { d.Year, d.Month })
+                .OrderBy(g => g.Key.Year)
+                .ThenBy(g => g.Key.Month)
                 .Select(g => new
                 {
                     Month = new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMM yyyy", CultureInfo.CurrentCulture),
                     Count = g.Count()
-                }).ToList();
+                })
+                .ToList();
+
 
             var weekDays = Enumerable.Range(0, 7)
                 .Select(i => CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames[(i + 1) % 7])
