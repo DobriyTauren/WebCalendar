@@ -3,6 +3,9 @@ name: Deploy Blazor WASM to GitHub Pages
 on:
   push:
     branches: [ "master" ]
+    paths-ignore:
+      - 'README.md'
+      - '*.md'
 
 jobs:
   build:
