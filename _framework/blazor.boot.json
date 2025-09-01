@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "WebCalendar.Client",
   "resources": {
-    "hash": "sha256-7hut/sww19j2sLHjvtA5jBCHJ3eyjlpLVElU0/orB1Y=",
+    "hash": "sha256-h/jrqHMcitP291elU5CRMF/6RRUW6UU7W3n/Z04xTz0=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "Microsoft.AspNetCore.Components.hjy4ia0zlx.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -39,7 +39,7 @@
       "System.Text.RegularExpressions.j5idjixed0.wasm": "System.Text.RegularExpressions.wasm",
       "System.Threading.cy526l72bt.wasm": "System.Threading.wasm",
       "System.Private.CoreLib.uw3s23u08t.wasm": "System.Private.CoreLib.wasm",
-      "WebCalendar.Client.at0tp5tc40.wasm": "WebCalendar.Client.wasm",
+      "WebCalendar.Client.3g69tnm34s.wasm": "WebCalendar.Client.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.50iqa8w3ys.js": "dotnet.native.js",
       "dotnet.native.pk43x8e436.wasm": "dotnet.native.wasm",
@@ -101,7 +101,7 @@
       "System.Text.Json.h6jruwiato.wasm": "sha256-J2h8It3KEE7eVU+nR3IyBWHVxVMv0KvA7MTuDKKmYtc=",
       "System.Text.RegularExpressions.j5idjixed0.wasm": "sha256-J6gVQlJLN+R0E5iZkmnNo2oa+uAfRpd0gqBpGPI8sdc=",
       "System.Threading.cy526l72bt.wasm": "sha256-XEsgkzB/5E/EJIekQAKL/++ZBvHe055n9Zo6Q2Ce2Zo=",
-      "WebCalendar.Client.at0tp5tc40.wasm": "sha256-opmBddK4vQi6Z08WAueefeRwmgr0YJ4dBrzjrIyMa00="
+      "WebCalendar.Client.3g69tnm34s.wasm": "sha256-HV4THuJ8/tyR1ZzlS+Dcm2EwMbJplY6P7kND8AXngMk="
     }
   },
   "cacheBootResources": true,
