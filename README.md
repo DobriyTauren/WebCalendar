@@ -32,4 +32,3 @@
 - Blazor WebAssembly 
 - Tailwind CSS 
 - LocalStorage
-- GitHub Pages для деплоя  
