@@ -32,3 +32,4 @@
 - Blazor WebAssembly 
 - Tailwind CSS 
 - LocalStorage
+- Highcharts
