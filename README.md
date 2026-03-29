@@ -1,33 +1,33 @@
 # WebCalendar
 
-Интерактивный календарь с цветными отметками, сменой тем и статистикой.  
-Приложение работает прямо в браузере и развернуто на **GitHub Pages**.
+An interactive calendar with colored markers, theme switching, and statistics.  
+The application runs directly in the browser and is deployed via **GitHub Pages**.
 
-🔗 [Попробовать приложение](https://dobriytauren.github.io/WebCalendar)
-
----
-
-## Возможности 
-
--  Цветные отметки на днях  
--  Переключение светлой и тёмной темы  
--  Статистика по отмеченным дням  
--  Сохранение данных в браузере  
--  Доступен без установки (работает прямо в браузере)  
+🔗 [Try the application](https://dobriytauren.github.io/WebCalendar)
 
 ---
 
-## Скриншоты
+## Features
 
-### Светлая тема
+- Colored markers on calendar days  
+- Light and dark theme switching  
+- Statistics for marked days  
+- Data is stored locally in the browser  
+- No installation required (runs directly in the browser)  
+
+---
+
+## Screenshots
+
+### Light Theme
 <img src="docs/screenshot-light.png" width="400"/> <img src="docs/screenshot-light-stats.png" width="400"/>
 
-### Тёмная тема
+### Dark Theme
 <img src="docs/screenshot-dark.png" width="400"/> <img src="docs/screenshot-dark-stats.png" width="400"/>
 
 ---
 
-## Технологии
+## Technologies
 
 - Blazor WebAssembly 
 - Tailwind CSS 
